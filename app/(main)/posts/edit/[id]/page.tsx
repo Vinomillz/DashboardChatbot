@@ -4,13 +4,7 @@ import React, { useEffect, useState } from 'react';
 import BackButton from '@/components/posts/BackButton';
 import posts from '@/data/posts';
 
-interface PostEditPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const PostEditPage = ({ params }: PostEditPageProps) => {
+const PostEditPage = ({ params }: { params: Promise<{ id: string }> }) => {
   // Use state to store the resolved params and post data
   const [resolvedParams, setResolvedParams] = useState<any>(null);
   const [post, setPost] = useState<any>(null);
@@ -41,27 +35,27 @@ const PostEditPage = ({ params }: PostEditPageProps) => {
 
   return (
     <>
-      <BackButton text='Back To Shipments' link='/posts' />
-      <h3 className='text-2xl mb-4'>Shipments Details</h3>
+      <BackButton text="Back To Shipments" link="/posts" />
+      <h3 className="text-2xl mb-4">Shipments Details</h3>
 
-      <div className='space-y-8'>
+      <div className="space-y-8">
         <div>
-          <h4 className='text-xl font-bold'>Title</h4>
+          <h4 className="text-xl font-bold">Title</h4>
           <p>{post.title}</p>
         </div>
 
         <div>
-          <h4 className='text-xl font-bold'>Body</h4>
+          <h4 className="text-xl font-bold">Body</h4>
           <p>{post.body}</p>
         </div>
 
         <div>
-          <h4 className='text-xl font-bold'>Driver</h4>
+          <h4 className="text-xl font-bold">Driver</h4>
           <p>{post.author}</p>
         </div>
 
         <div>
-          <h4 className='text-xl font-bold'>Date</h4>
+          <h4 className="text-xl font-bold">Date</h4>
           <p>{post.date}</p>
         </div>
       </div>
