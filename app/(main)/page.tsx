@@ -14,7 +14,7 @@ export default function Home() {
           title="Total Vendors"
           count={100}
           icon={
-            <LayoutDashboard  size={30} />
+            <LayoutDashboard  size={30} className="text-white"  />
           }
         />
         </div>
@@ -22,12 +22,12 @@ export default function Home() {
         <DashboardCard
           title="Total Riders"
           count={30}
-          icon={<Bike  size={30} />}
+          icon={<Bike  size={30} className="text-white" />}
         />
         <DashboardCard 
           title="Total Deliveries"
           count={4435}
-          icon={<PackageOpen size={30} />}
+          icon={<PackageOpen size={30} className="text-white" />}
         />
       </div>
       <div className="border-2  p-2 rounded-lg bg-slate-200">

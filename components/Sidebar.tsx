@@ -16,7 +16,7 @@ const Sidebar = () => {
   const isActive = (path: string): boolean => pathname === path;
 
   return (
-    <div className="bg-secondary rounded-none h-[100vh] pt-2 pl-2">
+    <div className=" rounded-none h-[100vh] pt-2 pl-2">
 
       {/* FIRST ELEMENT */}
       <div className={`flex items-center space-x-3 w-full p-2 text-lg  ${isActive("/") ? "text-white bg-green-700 rounded-lg" : ""}` }>

@@ -14,17 +14,17 @@ interface DashboardCardProps {
 }
 const DashboardCard = ({title, count, icon} : DashboardCardProps) => {
     return ( 
-        <Card className="bg-green-400 dark:bg-slate-800 p-4 pb-0">
+        <Card className="bg-green-700 dark:bg-slate-800 p-8 px-10 pb-0">
 <CardContent>
     
 
     <div className="flex gap-5 justify-left mb-2">
         {icon}
 
-        <span className="text-lg  mb-4 font-thin text-gray-600 dark:text-slate-200 ">{title}</span>
+        <span className="text-lg  mb-4 font-thin text-white  dark:text-slate-200 ">{title}</span>
         </div>
 
-        <h3 className="text-6xl font-medium  text-center dark:text-slate-200"> {count}</h3>
+        <h3 className="text-6xl font-medium text-white  text-center dark:text-slate-200"> {count}</h3>
     
 </CardContent>
         </Card>
