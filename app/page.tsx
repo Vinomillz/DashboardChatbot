@@ -25,10 +25,11 @@ const Home = () => {
         <Navchat />
       </div>
 
-      {/* Carousel as the background */}
-      <div className="absolute inset-28 -z-10 flex justify-center items-center md:h-auto">
+      
+      <div className="absolute inset-0 z-[-1] flex justify-center items-center w-full h-full sm:h-full md:h-auto">
   <Carousel />
 </div>
+
 
 
       {/* Overlay Content */}
