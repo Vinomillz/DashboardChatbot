@@ -33,9 +33,9 @@ const Home = () => {
 
 
       {/* Overlay Content */}
-      <div className="bg-black bg-opacity-75 h-full flex flex-col items-center justify-between">
+      <div className=" h-full flex flex-col items-center justify-between">
         {/* Heading Section */}
-        <div className="text-center text-white mt-20 px-4">
+        <div className="text-center text-black mt-20 px-4">
           <h1 className="font-bold text-4xl md:text-6xl mb-4">
             STRESS FREE-SHIPPING
           </h1>
