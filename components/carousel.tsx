@@ -26,7 +26,7 @@ const SlideshowLandingPage: React.FC = () => {
   }, [images.length]);
 
   return (
-    <div className="relative mt-11 w-full h-72 md:h-[450px] flex items-center justify-center overflow-hidden">
+    <div className="relative  w-full h-[400px]  md:h-[450px] lg:h-[530px] sm:h-[500px]   flex items-center justify-center overflow-hidden">
       {images.map((image, index) => {
         const position =
           (index - currentIndex + images.length) % images.length;
@@ -48,8 +48,8 @@ const SlideshowLandingPage: React.FC = () => {
             alt={`Slideshow ${index + 1}`}
             className={`absolute transition-all duration-1000 ${scale} ${zIndex} ${shadow} rounded-md`}
             style={{
-              width: isActive ? "70%" : "50%",
-              height: isActive ? "80%" : "60%",
+              width: isActive ? "80%" : "50%",
+              height: isActive ? "80%" : "50%",
               transform: `translateX(${(position - 1) * 100}%)`,
             }}
           />

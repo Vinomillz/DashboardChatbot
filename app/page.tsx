@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Navchat from "./navchat";
 import Carousel from "@/components/carousel";
-import { ChevronLeft, PackageOpen } from "lucide-react";
+import { Bot, ChevronLeft, PackageOpen } from "lucide-react";
 
 const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -26,9 +26,10 @@ const Home = () => {
       </div>
 
       {/* Carousel as the background */}
-      <div className="absolute inset-28 -z-10">
-        <Carousel />
-      </div>
+      <div className="absolute inset-28 -z-10 flex justify-center items-center md:h-auto">
+  <Carousel />
+</div>
+
 
       {/* Overlay Content */}
       <div className="bg-black bg-opacity-75 h-full flex flex-col items-center justify-between">
@@ -96,6 +97,11 @@ const Home = () => {
             </div>
           </div>
         )}
+      </div>
+       {/* Chatbot Icon */}
+       <div className="absolute bottom-4 right-4 p-3 bg-green-500 rounded-full cursor-pointer hover:bg-green-600 transition duration-300">
+        <Bot className="text-white text-3xl" />
+
       </div>
     </div>
   );
