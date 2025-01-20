@@ -25,7 +25,7 @@ const Home = () => {
         <Navchat />
       </div>
 
-      
+
       <div className="absolute inset-0 z-[-1] flex justify-center items-center w-full h-full sm:h-full md:h-auto">
   <Carousel />
 </div>
@@ -45,7 +45,7 @@ const Home = () => {
         </div>
 
         {/* Buttons Section */}
-        <div className="absolute bottom-10 flex items-center justify-center space-x-4 ">
+        <div className="absolute bottom-5 flex items-center justify-center space-x-4 ">
           {/* Back Button */}
           <span className="rounded-full bg-green-700 w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-green-600 transition duration-300">
             <Link href="/dashboard">
