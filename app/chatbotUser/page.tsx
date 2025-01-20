@@ -1,15 +1,15 @@
 import Navchat from "../navchat";
 import Image from "next/image"; 
-import map from "../../img/mapshit.png";
+import map from "../../img/mapping.png";
 import { Bot } from "lucide-react"; 
 
 const ChatbotUser = () => {
   return (
-    <div className="bg-black h-screen relative">
+    <div className="bg-white h-screen relative">
       <Navchat />
       
       <div className="ml-4 text-center">
-        <h1 className="font-bold text-4xl md:text-6xl mb-4 mt-10 text-white">
+        <h1 className="font-bold text-4xl md:text-6xl mb-4 mt-10 text-black">
           Welcome Vincent
         </h1>
 
