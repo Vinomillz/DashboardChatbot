@@ -46,7 +46,7 @@ const Navbar = () => {
           {/* <Link href='/profile'> <DropdownMenuItem>Profile</DropdownMenuItem></Link> */}
 
           <Link href="/auth">
-            {" "}
+          
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </Link>
         </DropdownMenuContent>
