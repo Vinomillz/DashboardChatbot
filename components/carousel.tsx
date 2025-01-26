@@ -38,7 +38,7 @@ const SlideshowLandingPage: React.FC = () => {
           : "scale-90 opacity-70";
         const zIndex = isActive ? "z-10" : "z-0";
         const shadow = isActive
-          ? "shadow-xl shadow-white/50"
+          ? "shadow-xl shadow-white/20"
           : "shadow-md shadow-gray-500/30";
 
         return (
@@ -48,7 +48,7 @@ const SlideshowLandingPage: React.FC = () => {
             alt={`Slideshow ${index + 1}`}
             className={`absolute transition-all duration-1000 ${scale} ${zIndex} ${shadow} rounded-md`}
             style={{
-              width: isActive ? "80%" : "50%",
+              width: isActive ? "60%" : "50%",
               height: isActive ? "80%" : "50%",
               transform: `translateX(${(position - 1) * 100}%)`,
             }}
