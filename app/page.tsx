@@ -7,6 +7,21 @@ import LOGO from "../img/LOGOFLEETY.jpg";
 import BG_IMAGE from "../img/backgeoundimae.jpg"; 
 import Image from "next/image";
 
+
+// sheet
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+
+
+// end of sheet
+
 const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -37,7 +52,7 @@ const Home = () => {
       <div className="fixed top-0 left-0 w-full z-50">
         <div className="bg-[#092948]">
           <div>
-            <div className="py-2 px-5 flex justify-between z-10 sticky top-0 shadow-sm">
+            <div className="py-2 px-5 flex justify-between z-10 sticky top-0 shadow-sm items-center">
               <Link href="/">
                 <Image
                   src={LOGO}
@@ -46,6 +61,10 @@ const Home = () => {
                   className="rounded-full"
                 />
               </Link>
+
+                <button className="text-[#0c304d] bg-white font-bold w-44  h-12 rounded-full">  <Link href="/auth/register">Get started </Link></button>
+
+            
             </div>
           </div>
         </div>
@@ -116,9 +135,28 @@ const Home = () => {
       )}
 
       {/* Chatbot Icon */}
-      <div className="absolute bottom-4 right-4 p-3 bg-[#0c304d] rounded-full cursor-pointer hover:bg-blue-800 transition duration-300 z-30">
-        <Bot className="text-white text-3xl" />
+      <div className="absolute bottom-4 right-4 p-3 bg-[#0c304d] rounded-lg cursor-pointer hover:bg-blue-800 transition duration-300 z-30">
+       
+
+        <Sheet>
+  <SheetTrigger> <Bot className="text-white text-3xl" /> </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Are you absolutely sure?</SheetTitle>
+      <SheetDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
       </div>
+
+   
+
+
+
+
     </div>
   );
 };
