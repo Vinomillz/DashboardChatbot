@@ -23,7 +23,7 @@ const EmailVerification: React.FC = () => {
   const verifyEmail = async (token: string) => {
     setLoading(true);
     try {
-      const response = await fetch("/auth/verify_email", {
+      const response = await fetch("https://logistic-chatbot.onrender.com/api/v1/auth/verify-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const EmailVerification: React.FC = () => {
 
       if (response.ok) {
         setStatus("success");
-        router.push("/auth/login"); // Redirect after success
+        router.push("/auth/login"); 
       } else {
         const error = await response.json();
         setStatus(error.message || "Verification failed.");
