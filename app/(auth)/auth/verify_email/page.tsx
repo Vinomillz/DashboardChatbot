@@ -1,45 +1,54 @@
 'use client';
 import React, { useState } from "react";
 import Image from "next/image";
-import bgImage from "../../../../img/backgeoundimae.jpg"; 
+import bgImage from "../../../../img/backgeoundimae.jpg";
 import { useSearchParams } from "next/navigation";
 
-
-
 const EmailVerification: React.FC = () => {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("token");
+  const [formData, setFormData] = useState({ email: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const searchParams = useSearchParams()
-  
-
-    const query = searchParams.get('token')
-
-
-console.log(query, "token");
-
-
-
-  const [formData, setFormData] = useState({
-   
-    email: "",
-  
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    if (!query) {
+      alert("Verification token is missing!");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const payload = { email: formData.email, token: query };
+
+    try {
+      const response = await fetch("/api/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        alert("Email verified successfully!");
+      } else {
+        alert("Email verification failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="relative h-screen w-screen">
-      {/* Background Image */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 h-full w-full">
         <Image
           src={bgImage}
           alt="Background"
@@ -49,41 +58,38 @@ console.log(query, "token");
         />
       </div>
 
-      {/* Form Container */}
       <div className="flex items-center justify-center h-full">
-        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
             Email Verification
           </h2>
+          <p className="text-center text-gray-600 mb-4">
+            Token: <span className="font-mono text-blue-600">{query || "No token found"}</span>
+          </p>
           <form onSubmit={handleSubmit} className="space-y-4">
-           
-          
-           
             <div>
               <input
                 type="email"
                 name="email"
-                placeholder="verify Email"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full p-2 rounded-md bg-gray-100 text-gray-800 placeholder-gray-400 border border-gray-300"
+                className="w-full p-3 rounded-md bg-gray-100 text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
-          
             <button
               type="submit"
-              className="w-full py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700"
+              disabled={isSubmitting}
+              className={`w-full py-3 rounded-lg font-semibold text-white transition-all ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              verify
+              {isSubmitting ? "Verifying..." : "Verify"}
             </button>
           </form>
-          <p className="text-center text-gray-600 mt-4">
-            Don't have an account?{" "}
-            <a href="/auth/register" className="text-blue-500 hover:underline">
-              Sign up
-            </a>
-          </p>
         </div>
       </div>
     </div>
