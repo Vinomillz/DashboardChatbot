@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import bgImage from "../../../../img/backgeoundimae.jpg"; 
+import bgImage from "../../../../img/backgeoundimae.jpg";
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
-    accountType: "Driver",
+    accountType: "driver",
     lastName: "",
     firstName: "",
     licenseNumber: "",
@@ -20,14 +20,52 @@ const Register: React.FC = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+
+    console.log(formData, "form");
+
+
+const payload = {
+  email: formData.email,
+  type: formData.accountType,
+  first_name : formData.firstName,
+  last_name : formData.lastName,
+  password : formData.password
+}
+
+    
+    
+
+    try {
+      const response = await fetch(
+        "https://logistic-chatbot.onrender.com/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Registration successful!", data);
+        alert("Registration successful!");
+      } else {
+        const errorData = await response.json();
+        console.error("Registration failed:", errorData);
+        alert(`Registration failed: ${errorData.message || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
     <div className="relative h-screen w-screen">
-      {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
           src={bgImage}
@@ -38,7 +76,6 @@ const Register: React.FC = () => {
         />
       </div>
 
-      {/* Form Container */}
       <div className="flex items-center justify-center h-full">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
@@ -60,7 +97,7 @@ const Register: React.FC = () => {
                 className="mt-1 block w-full rounded-md py-4 border-gray-300 bg-gray-100 text-gray-800 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option>Driver</option>
-                <option>vendor</option>
+                <option>Vendor</option>
               </select>
             </div>
             <div>
