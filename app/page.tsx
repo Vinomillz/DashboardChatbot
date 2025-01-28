@@ -18,6 +18,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
+import CustomerChat from "@/components/CustomerChat";
+
 
 
 // end of sheet
@@ -140,14 +142,16 @@ const Home = () => {
 
         <Sheet>
   <SheetTrigger> <Bot className="text-white text-3xl" /> </SheetTrigger>
-  <SheetContent>
+  <SheetContent >
     <SheetHeader>
-      <SheetTitle>Are you absolutely sure?</SheetTitle>
-      <SheetDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </SheetDescription>
+      <SheetTitle></SheetTitle>
+    
     </SheetHeader>
+
+
+
+    <CustomerChat  />
+
   </SheetContent>
 </Sheet>
       </div>
