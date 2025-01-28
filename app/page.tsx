@@ -114,15 +114,15 @@ const Home = () => {
 
       {/* Popup Overlay */}
       {isPopupOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
-          <div className="bg-[#092948] p-6 pb-28 rounded-lg w-96 relative">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-30 z-50 flex justify-center items-center">
+          <div className="bg-[#092948] p-6 pb-28  rounded-lg w-96 relative">
             <h2 className="text-xl font-bold mb-4">Input Your Tracking ID</h2>
             <input
-              className="text-gray-500 mb-4 p-4 rounded-sm bg-black"
-              placeholder="ID:"
+              className="text-gray-500 mb-4 p-4 rounded-sm bg-black w-full"
+              placeholder="your tracking id:"
             />
             <Link href="/chatbotUser">
-              <button className="flex items-center justify-center text-[#0c304d] bg-white font-bold w-60 h-12 rounded-full shadow-md hover:bg-green-600 hover:text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500">
+              <button className="flex items-center justify-center w-full text-[#0c304d] bg-white font-bold  h-12 rounded-full shadow-md hover:bg-green-600 hover:text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500">
                 Enter
               </button>
             </Link>
