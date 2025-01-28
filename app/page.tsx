@@ -75,7 +75,7 @@ const Home = () => {
       {/* Main Content */}
       <div className="absolute inset-0 flex flex-col justify-start items-center">
         {/* Text Section */}
-        <div className="relative z-20 text-center text-white mt-10 px-4 top-[2%] md:top-[10%]">
+        <div className="relative z-20 text-center text-white mt-10 px-4 top-[22%] md:top-[10%]">
           <h1 className="font-bold text-4xl md:text-6xl mb-4">
             STRESS FREE-SHIPPING
           </h1>
@@ -85,7 +85,7 @@ const Home = () => {
         </div>
 
         {/* Carousel Section */}
-        <div className="absolute inset-0 z-10 top-[15%]">
+        <div className="absolute inset-0 z-10 top-[20%]">
           <Carousel />
         </div>
       </div>
