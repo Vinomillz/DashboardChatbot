@@ -1,5 +1,5 @@
 import React from "react";
-import { Package, ArrowRight } from "lucide-react"; // For icons
+import { Package, ArrowRight } from "lucide-react"; 
 
 interface ShipmentCardProps {
   shipmentNumber: string;
@@ -58,12 +58,12 @@ const ShipmentCard: React.FC<ShipmentCardProps> = ({
       {/* Delivery Fee */}
       <div className="border-t pt-2 mb-3">
         <p className="text-sm font-semibold">
-          Delivery Fee: <span className="text-black font-bold">₱{deliveryFee.toFixed(2)}</span>
+          Delivery Fee: <span className="text-black font-bold">#{deliveryFee.toFixed(2)}</span>
         </p>
       </div>
 
       {/* Button */}
-      <button className="w-full bg-blue-600 text-white text-sm py-2 rounded-lg hover:bg-blue-700 transition">
+      <button className="w-full bg-[#092948] text-white text-sm py-2 rounded-lg hover:bg-blue-700 transition">
         VIEW DETAILS
       </button>
     </div>
