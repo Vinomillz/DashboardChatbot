@@ -22,7 +22,7 @@ const CustomerChat = () => {
   // ✅ Connect to Socket.IO and listen for messages
   useEffect(() => {
     console.log('effect running');
-    const socket = io('http://localhost:8080', {
+    const socket = io('https://logistic-chatbot.onrender.com', {
       withCredentials: true,
       transports: ['websocket'],
     });
