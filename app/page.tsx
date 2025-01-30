@@ -1,12 +1,13 @@
-"use client";
-import { useState } from "react";
-import Link from "next/link";
-import Carousel from "@/components/carousel";
-import { Bot, ChevronLeft, PackageOpen } from "lucide-react";
-import LOGO from "../img/LOGOFLEETY.jpg";
-import BG_IMAGE from "../img/backgeoundimae.jpg"; 
-import Image from "next/image";
-
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import Carousel from '@/components/carousel';
+import { Bot, ChevronLeft, PackageOpen } from 'lucide-react';
+import LOGO from '../img/LOGOFLEETY.jpg';
+import BG_IMAGE from '../img/backgeoundimae.jpg';
+import Image from 'next/image';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 // sheet
 import {
@@ -16,16 +17,23 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from '@/components/ui/sheet';
 
-import CustomerChat from "@/components/CustomerChat";
-
-
+import CustomerChat from '@/components/CustomerChat';
+import { httpRequest } from '@/lib/api';
+import { useAppStore } from '@/store/app_store';
+import { Order } from '@/types/order';
 
 // end of sheet
 
 const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { setOrder } = useAppStore();
+
+  const router = useRouter();
 
   // Function to open the popup
   const openPopup = () => {
@@ -37,12 +45,37 @@ const Home = () => {
     setIsPopupOpen(false);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    const { data, error } = await httpRequest<Order>(
+      `/order/track-order/${inputValue}`,
+      'GET'
+    );
+
+    if (error) {
+      toast.error(error.message);
+    }
+    if (data) {
+      setOrder(data.data);
+      router.push('/track_product');
+    }
+
+    console.log(data);
+    console.log(error);
+    setIsLoading(false);
+
+    console.log(inputValue);
+  };
+
   return (
     <div className="relative h-screen">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src={BG_IMAGE} 
+          src={BG_IMAGE}
           alt="Background"
           layout="fill"
           objectFit="cover" // Ensures the image covers the full screen
@@ -64,9 +97,10 @@ const Home = () => {
                 />
               </Link>
 
-                <button className="text-[#0c304d] bg-white font-bold w-44  h-12 rounded-full">  <Link href="/auth/register">Get started </Link></button>
-
-            
+              <button className="text-[#0c304d] bg-white font-bold w-44  h-12 rounded-full">
+                {' '}
+                <Link href="/auth/register">Get started </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -106,8 +140,8 @@ const Home = () => {
           </div>
           <span className="text-lg font-bold">Start</span>
           <div className="flex items-center space-x-1 text-gray-400">
-            <span className="font-bold">{">"}</span>
-            <span className="font-bold">{">"}</span>
+            <span className="font-bold">{'>'}</span>
+            <span className="font-bold">{'>'}</span>
           </div>
         </button>
       </div>
@@ -115,52 +149,54 @@ const Home = () => {
       {/* Popup Overlay */}
       {isPopupOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-30 z-50 flex justify-center items-center">
-          <div className="bg-[#092948] p-6 pb-28  rounded-lg w-96 relative">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#092948] p-6 pb-28  rounded-lg w-96 relative"
+          >
             <h2 className="text-xl font-bold mb-4">Input Your Tracking ID</h2>
             <input
               className="text-gray-500 mb-4 p-4 rounded-sm bg-black w-full"
               placeholder="your tracking id:"
+              value={inputValue}
+              required
+              maxLength={12}
+              onChange={(e) => setInputValue(e.target.value)}
             />
-            <Link href="/chatbotUser">
-              <button className="flex items-center justify-center w-full text-[#0c304d] bg-white font-bold  h-12 rounded-full shadow-md hover:bg-green-600 hover:text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500">
-                Enter
-              </button>
-            </Link>
+
             <button
+              type="submit"
+              className="flex items-center justify-center w-full text-[#0c304d] bg-white font-bold  h-12 rounded-full shadow-md hover:bg-green-600 hover:text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              {isLoading ? 'Trackig...' : 'Track'}
+            </button>
+
+            <button
+              type="button"
               onClick={closePopup}
               className="absolute top-2 right-2 bg-red-500 text-white py-2 px-4 rounded-sm"
             >
               X
             </button>
-          </div>
+          </form>
         </div>
       )}
 
       {/* Chatbot Icon */}
       <div className="absolute bottom-4 right-4 p-3 bg-[#0c304d] rounded-lg cursor-pointer hover:bg-blue-800 transition duration-300 z-30">
-       
-
         <Sheet>
-  <SheetTrigger> <Bot className="text-white text-3xl" /> </SheetTrigger>
-  <SheetContent >
-    <SheetHeader>
-      <SheetTitle></SheetTitle>
-    
-    </SheetHeader>
+          <SheetTrigger>
+            {' '}
+            <Bot className="text-white text-3xl" />{' '}
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle></SheetTitle>
+            </SheetHeader>
 
-
-
-    <CustomerChat  />
-
-  </SheetContent>
-</Sheet>
+            <CustomerChat />
+          </SheetContent>
+        </Sheet>
       </div>
-
-   
-
-
-
-
     </div>
   );
 };

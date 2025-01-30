@@ -1,13 +1,14 @@
-import Navchat from "../navchat";
-import Image from "next/image"; 
-import map from "../../img/mapping.png";
-import { Bot } from "lucide-react"; 
+import Navchat from '@/app/navchat';
+import Image from 'next/image';
+import React from 'react';
+import { Bot } from 'lucide-react';
+import map from '../../img/mapping.png';
 
-const ChatbotUser = () => {
+function OrderTracker() {
   return (
     <div className="bg-white h-screen relative">
       <Navchat />
-      
+
       <div className="ml-4 text-center">
         <h1 className="font-bold text-4xl md:text-6xl mb-4 mt-10 text-black">
           Welcome Vincent
@@ -31,10 +32,9 @@ const ChatbotUser = () => {
       {/* Chatbot Icon */}
       <div className="absolute bottom-4 right-4 p-3 bg-green-500 rounded-full cursor-pointer hover:bg-green-600 transition duration-300">
         <Bot className="text-white text-3xl" />
-
       </div>
     </div>
   );
-};
+}
 
-export default ChatbotUser;
+export default OrderTracker;
